@@ -1,0 +1,15 @@
+//
+//  Layout
+//  _____________________________________________
+
+.container-vp-full {
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: $wrapper-max-width;
+    margin: 0 auto;
+    padding: 0 $mg-tiny;
+}

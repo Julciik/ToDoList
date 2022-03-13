@@ -21,6 +21,10 @@ const paths = {
     js: {
         src: 'src/js/**/*.js',
         dest: 'output/assets/js'
+    },
+    fonts: {
+        src: 'src/fonts/*',
+        dest: 'output/assets/fonts'
     }
 };
 
@@ -55,6 +59,11 @@ function js () {
         .pipe(dest(paths.js.dest))
 }
 
+function fonts () {
+    return src(paths.fonts.src)
+        .pipe(dest(paths.fonts.dest))
+}
+
 function watchFiles () {
     browserSync.init({
         server: {
@@ -69,7 +78,7 @@ function watchFiles () {
     watch('src/').on('change', browserSync.reload);
 }
 
-const build = series(clean, parallel(html, css, js), watchFiles);
+const build = series(clean, fonts, parallel(html, css, js), watchFiles);
 
 exports.css = css;
 exports.js = js;

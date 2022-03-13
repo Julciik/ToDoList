@@ -1,0 +1,34 @@
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Colors
+//  ---------------------------------------------
+
+$color-black: #000;
+$color-outer-space: #2c3333;
+$color-william: #395b64;
+$color-mariner: #2666cf;
+$color-ecru-white: #f5F2e7;
+$color-white: #fff;
+
+//
+//  Margins
+//  ---------------------------------------------
+
+$mg-base:       4px;
+$mg-atomic:     $mg-base;
+$mg-micro:      $mg-base * 2;   //8px
+$mg-tiny:       $mg-base * 4;   //16px
+$mg-small:      $mg-base * 6;   //24px
+$mg-reduced:    $mg-base * 8;   //32px
+$mg-regular:    $mg-base * 10;  //40px
+$mg-increased:  $mg-base * 12;  //48px
+
+//
+//  Layout
+//  ---------------------------------------------
+
+$wrapper-max-width: 1000px;
+$wrapper-padding: 1200px;

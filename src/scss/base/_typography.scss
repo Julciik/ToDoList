@@ -1,0 +1,73 @@
+//
+//  Typography
+//  _____________________________________________
+
+//
+//  Typography @font-face
+//  ---------------------------------------------
+
+// Lato Regular
+@font-face {
+    font-family: Lato;
+    src: url('../fonts/Lato-Regular.eot');
+    src: url('../fonts/Lato-Regular.eot') format('embedded-opentype'),
+    url('../fonts/Lato-Regular.woff2') format('woff2'),
+    url('../fonts/Lato-Regular.woff') format('woff'),
+    url('../fonts/Lato-Regular.ttf') format('truetype'),
+    url('../fonts/Lato-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+// Lato Bold
+@font-face {
+    font-family: Lato;
+    src: url('../fonts/Lato-Bold.eot');
+    src: url('../fonts/Lato-Bold.eot') format('embedded-opentype'),
+    url('../fonts/Lato-Bold.woff2') format('woff2'),
+    url('../fonts/Lato-Bold.woff') format('woff'),
+    url('../fonts/Lato-Bold.ttf') format('truetype'),
+    url('../fonts/Lato-Bold.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+//
+//  Typography Variables
+//  ---------------------------------------------
+
+$font-name__base: Lato;
+$font-name__sans-serif: Arial, sans-serif;
+
+$font__base: $font-name__base, $font-name__sans-serif;
+
+//
+//  Typography Mixins
+//  ---------------------------------------------
+
+@mixin h1 {
+    font-size: 48px;
+    line-height: 32px;
+}
+
+@mixin h2 {
+    font-size: 40px;
+    line-height: 32px;
+}
+
+@mixin body1 {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: .02em;
+}
+
+//
+//  Typography Declaration
+//  ---------------------------------------------
+
+body {
+    @include body1;
+    font-family: $font__base;
+}

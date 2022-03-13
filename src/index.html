@@ -10,8 +10,49 @@
 </head>
 
 <body>
-    <div>Hello World!</div>
-</body>
+    <div class="todolist-container container container-vp-full">
+        <div class="wrapper">
+            <div class="todo-list">
+                <header class="todo-header">
+                    <h1 class="todo-title">ToDo</h1>
+                </header>
+                <section class="todo-add">
+                    <form action="" class="todo-form">
+                        <input type="text" class="input todo-input" placeholder="Your task"/>
+                        <button type="submit" class="button todo-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8px" height="8px" viewBox="0 0 8 8">
+                                <path d="M 8 3.332031 L 4.667969 3.332031 L 4.667969 0 L 3.332031 0 L 3.332031 3.332031 L 0 3.332031 L 0 4.667969 L 3.332031 4.667969 L 3.332031 8 L 4.667969 8 L 4.667969 4.667969 L 8 4.667969 Z M 8 3.332031 "/>
+                            </svg>
+                        </button>
+                    </form>
+                </section>
+                <section class="todo-items"></section>
+                <section class="todo-bottom">
+                    <div class="todo-counter">
+                        <p>2 tasks left</p>
+                    </div>
+                    <div class="todo-actions">
+                        <div class="todo-actions-all">
+                            <a href="#" class="todo-action">Show All</a>
+                        </div>
+                        <div class="todo-actions-active">
+                            <a href="#" class="todo-action">Show Active</a>
+                        </div>
+                        <div class="todo-actions-completed">
+                            <a href="#" class="todo-action">Show Completed</a>
+                        </div>
+                        <div class="todo-actions-clear">
+                            <a href="#" class="todo-action">Clear Completed</a>
+                        </div>
+                    </div>
+                </section>
+                <footer class="todo-footer">
+                    <p>Made with &hearts; by Julia</p>
+                </footer>
+            </div>
+        </div>
+    </div>
 
-<script src="assets/js/index-min.js"></script>
+    <script src="assets/js/index-min.js"></script>
+</body>
 </html>

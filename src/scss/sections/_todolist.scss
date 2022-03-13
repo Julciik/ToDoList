@@ -1,0 +1,11 @@
+.todolist-container {
+    @include flex-center;
+    background-color: $color-ecru-white;
+}
+
+.todo-list {
+    height: 600px;
+    padding: $mg-reduced;
+    background-color: $color-outer-space;
+    border-radius: 4px;
+}

@@ -1,0 +1,26 @@
+//
+//  Buttons
+//  _____________________________________________
+
+//
+//  Buttons Mixins
+//  ---------------------------------------------
+
+@mixin button-icon {
+    @include flex-center;
+    width: 38px;
+    height: 38px;
+    padding: $mg-micro;
+    appearance: none;
+    background-color: $color-white;
+    border: 1px solid $color-white;
+    cursor: pointer;
+}
+
+//
+//  Buttons Declaration
+//  ---------------------------------------------
+
+.button-icon {
+    @include button-icon;
+}

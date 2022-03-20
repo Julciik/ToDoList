@@ -49,7 +49,7 @@ $font__base: $font-name__base, $font-name__sans-serif;
 
 @mixin h1 {
     font-size: 48px;
-    line-height: 32px;
+    line-height: 40px;
 }
 
 @mixin h2 {
@@ -61,6 +61,11 @@ $font__base: $font-name__base, $font-name__sans-serif;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: .02em;
+}
+
+@mixin small {
+    font-size: 12px;
+    line-height: 16px;
 }
 
 //

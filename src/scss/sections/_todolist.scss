@@ -4,8 +4,64 @@
 }
 
 .todo-list {
+    display: flex;
+    flex-direction: column;
     height: 600px;
-    padding: $mg-reduced;
+    padding: $mg-increased $mg-increased $mg-tiny;
     background-color: $color-outer-space;
     border-radius: 4px;
+    color: $color-white;
+}
+
+.todo-header {
+    @include h1;
+    font-weight: bold;
+    letter-spacing: .04em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.todo-add {
+    margin: $mg-regular 0;
+}
+
+.todo-form {
+    display: flex;
+    align-items: flex-end;
+
+    .todo-input {
+        width: 100%;
+    }
+}
+
+.todo-bottom {
+    display: flex;
+    margin-top: auto;
+
+    .todo-counter {
+        padding-right: $mg-tiny;
+        margin-right: auto;
+    }
+
+    .todo-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 0 -$mg-atomic;
+    }
+
+    .todo-action {
+        padding: 0 $mg-atomic;
+    
+        .todo-action-link {
+            color: $color-white;
+        
+        }
+    }
+}
+
+.todo-footer {
+    @include small;
+    margin-top: $mg-small;
+    text-align: right;
 }

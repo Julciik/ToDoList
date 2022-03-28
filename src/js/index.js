@@ -3,42 +3,68 @@ class Task {
         this.content = content;
         this.isCompleted = false;
     }
+
+    // set id (value) {
+    //     this._id = value;
+    // }
+
+    // get id () {
+    //     return this._id;
+    // }
 }
 
 class ToDoList {
     constructor () {
         this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         this.completed = [];
+        this.tasksContainer = document.getElementById('todo-items');
 
         this.init();
     }
 
     addTask (content) {
         if (content !== '') {
-            this.tasks.push(new Task(content));
+            const task = new Task(content);
+            this.tasks.push(task);
             this.addToLocalStorage();
-            this.renderList(this.tasks);
+            this.renderTasks(this.tasks);
 
             return;
         }
 
-        //TODO: add error method
+        //TODO: add better error method
+        alert('Type something!');
     }
 
-    renderList (tasksArray) {
-        const tasksList = document.getElementById('todo-items');
+    renderTasks (tasksArray) {
+        const taskItemClass = 'todo-item';
+
+        this.tasksContainer.innerHTML = '';
 
         tasksArray.forEach(task => {
-            console.log(task);
             const taskItem = document.createElement('li');
-
+            taskItem.classList.add(taskItemClass);
             taskItem.innerHTML = task.content;
-
-            tasksList.append(taskItem);
+            
+            taskItem.append(this.renderRemoveButton());
+            this.tasksContainer.append(taskItem);
         })
     }
 
-    addToLocalStorage (element) {
+    renderRemoveButton () {
+        const removeButton = document.createElement('button');
+        removeButton.setAttribute('class', 'todo-remove-button')
+        //TODO: Add svg icon
+        removeButton.innerHTML = 'Delete';
+
+        // removeButton.addEventListener('click', function () {
+        
+        // })
+
+        return removeButton;
+    }
+
+    addToLocalStorage () {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 
@@ -52,12 +78,8 @@ class ToDoList {
         })
     }
 
-    render (tasksArray) {
-        this.renderList(tasksArray);
-    }
-
     init () {
-        this.render(this.tasks);
+        this.renderTasks(this.tasks);
         this.bind();
     }
 }

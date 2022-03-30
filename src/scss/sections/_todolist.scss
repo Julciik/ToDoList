@@ -16,7 +16,7 @@
 .todo-header {
     @include h1;
     font-weight: bold;
-    letter-spacing: .04em;
+    letter-spacing: .06em;
     text-align: center;
     text-transform: uppercase;
 }
@@ -31,6 +31,54 @@
 
     .todo-input {
         width: 100%;
+    }
+}
+
+.todo-items-container {
+    overflow-y: auto;
+    max-height: 300px;
+    padding-right: $mg-micro;
+
+    .todo-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: $mg-tiny;
+        padding: $mg-tiny $mg-micro;
+        background-color: $color-ecru-white;
+        color: $color-black;
+        transition: .3s background-color;
+
+        &:hover {
+            background-color: $color-white;
+        }
+    }
+
+    .todo-item-completed {
+        background-color: rgba($color-white, 80%);
+
+        .todo-item-content {
+            text-decoration: line-through;
+        }
+    }
+
+    .todo-item-content {
+        margin-right: auto;
+    }
+
+    .todo-item-actions {
+        margin: 0 -$mg-atomic;
+    }
+
+    .todo-task-button {
+        margin: 0 $mg-atomic;
+    }
+
+    .todo-done-button {
+        @include button($color-william);
+    }
+
+    .todo-remove-button {
+        @include button(#860015);
     }
 }
 

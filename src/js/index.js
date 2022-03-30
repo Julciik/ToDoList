@@ -3,29 +3,33 @@ class Task {
         this.content = content;
         this.isCompleted = false;
     }
-
-    // set id (value) {
-    //     this._id = value;
-    // }
-
-    // get id () {
-    //     return this._id;
-    // }
 }
 
 class ToDoList {
     constructor () {
         this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        this.completed = [];
+        this.activeTasks = [];
+        this.completedTasks = [];
         this.tasksContainer = document.getElementById('todo-items');
+        this.doneTaskClass = 'todo-item-completed';
 
         this.init();
     }
 
-    addTask (content) {
+    addTask () {
+        const button = document.getElementById('todo-button-add');
+        const input = document.getElementById('todo-input');
+
+        button.addEventListener('click', () => {
+            this.saveTask(input.value);
+            input.value = '';
+        })
+    }
+
+    saveTask (content) {
         if (content !== '') {
             const task = new Task(content);
-            this.tasks.push(task);
+            this.tasks.unshift(task);
             this.addToLocalStorage();
             this.renderTasks(this.tasks);
 
@@ -36,52 +40,121 @@ class ToDoList {
         alert('Type something!');
     }
 
-    renderTasks (tasksArray) {
-        const taskItemClass = 'todo-item';
-
+    createTasksList (tasksArray) {
         this.tasksContainer.innerHTML = '';
 
-        tasksArray.forEach(task => {
+        tasksArray.forEach((task, taskIndex) => {
             const taskItem = document.createElement('li');
-            taskItem.classList.add(taskItemClass);
-            taskItem.innerHTML = task.content;
+            const taskContent = document.createElement('span');
+            const taskActions = document.createElement('div');
+
+            const doneButton = document.createElement('button');
+            const removeButton = document.createElement('button');
+
+            taskItem.classList.add('todo-item');
+            taskContent.classList.add('todo-item-content');
+            taskActions.classList.add('todo-item-actions');
+
+            taskContent.innerHTML = task.content;
+
+            doneButton.setAttribute('class', 'todo-task-button todo-done-button')
+            doneButton.innerHTML = 'Done';
+
+            doneButton.addEventListener('click', (e) => {
+                e.currentTarget.parentNode.parentNode.classList.add(this.doneTaskClass);
+                taskActions.removeChild(doneButton);
+                task.isCompleted = true;
+                this.addToLocalStorage();
+                this.renderTasks(this.tasks);
+            })
+
+            removeButton.setAttribute('class', 'todo-task-button todo-remove-button')
+            removeButton.innerHTML = 'Delete';
             
-            taskItem.append(this.renderRemoveButton());
+            removeButton.addEventListener('click', () => {
+                this.tasksContainer.removeChild(taskItem);
+                this.tasks.splice(taskIndex, 1);
+                this.addToLocalStorage();
+                this.renderTasks(this.tasks);
+            })
+            
+
+            if (task.isCompleted) {
+                taskItem.classList.add(this.doneTaskClass);
+                taskActions.append(removeButton);
+            }
+
+            if (!task.isCompleted) {
+                taskActions.append(doneButton, removeButton);
+            }
+
+            taskItem.append(taskContent, taskActions);
             this.tasksContainer.append(taskItem);
         })
     }
 
-    renderRemoveButton () {
-        const removeButton = document.createElement('button');
-        removeButton.setAttribute('class', 'todo-remove-button')
-        //TODO: Add svg icon
-        removeButton.innerHTML = 'Delete';
+    tasksFilters () {
+        const showAll = document.getElementById('todo-show-all');
+        const showActive = document.getElementById('todo-show-active');
+        const showCompleted = document.getElementById('todo-show-completed');
+        const clearCompleted = document.getElementById('todo-clear-completed');
 
-        // removeButton.addEventListener('click', function () {
+        showAll.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            this.renderTasks(this.tasks);
+        })
+
+        showActive.addEventListener('click', (e) => {
+            e.preventDefault();
         
-        // })
+            this.activeTasks = this.tasks.filter((task) => task.isCompleted === false);
+            this.renderTasks(activeTasks);
+        })
 
-        return removeButton;
+        showCompleted.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            //TODO: Fix duplicated arrays
+
+            this.completedTasks = this.tasks.filter((task) => task.isCompleted === true);
+            this.renderTasks(this.completedTasks);
+        })
+
+        clearCompleted.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const completedTasks = this.tasks.filter((task) => task.isCompleted === true);
+            const completedTaskItems = this.tasksContainer.querySelector(`.${ this.doneTaskClass }`);
+
+            completedTasks.forEach(completedTask => {
+                this.tasks.splice(this.tasks.findIndex(task => task.content === completedTask.content), 1);
+            })
+
+            if (completedTaskItems) {
+                //TODO: Remove nodes
+            }
+
+            this.addToLocalStorage();
+            this.renderTasks(this.tasks);
+        })
     }
 
     addToLocalStorage () {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 
-    bind () {
-        const button = document.getElementById('todo-button-add');
-        const input = document.getElementById('todo-input');
-
-        button.addEventListener('click', () => {
-            this.addTask(input.value);
-            input.value = '';
-        })
+    renderTasks (tasksArray) {
+        this.tasksFilters();
+        this.createTasksList(tasksArray);
     }
 
     init () {
+        this.addTask();
         this.renderTasks(this.tasks);
-        this.bind();
     }
+
+    //TODO: Left task counter
 }
 
 const toDoList = new ToDoList();

@@ -6,20 +6,46 @@
 //  Buttons Mixins
 //  ---------------------------------------------
 
+@mixin button ($background: $color-mariner) {
+    @include button-hover($background);
+    @include small;
+    padding: $mg-micro $mg-small;
+    appearance: none;
+    background-color: $background;
+    border: none;
+    color: $color-white;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 @mixin button-icon {
+    @include button-hover($color-ecru-white);
     @include flex-center;
     width: 38px;
     height: 38px;
     padding: $mg-micro;
     appearance: none;
-    background-color: $color-white;
-    border: 1px solid $color-white;
+    background-color: $color-ecru-white;
+    border: 1px solid $color-ecru-white;
     cursor: pointer;
+}
+
+@mixin button-hover($color, $amount: 6%) {
+    transition: .3s background-color;
+
+    &:hover {
+        background-color: lighten($color, $amount);
+    }
 }
 
 //
 //  Buttons Declaration
 //  ---------------------------------------------
+
+.button {
+    @include button;
+}
 
 .button-icon {
     @include button-icon;

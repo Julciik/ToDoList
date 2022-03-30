@@ -53,9 +53,11 @@ function css () {
 
 function js () {
     return src(paths.js.src)
+        .pipe(sourcemaps.init())
         .pipe(concat('index.js'))
         .pipe(babel())
         .pipe(minify())
+        .pipe(sourcemaps.write())
         .pipe(dest(paths.js.dest))
 }
 

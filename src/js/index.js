@@ -58,7 +58,7 @@ class ToDoList {
     }
 
     createTasksList (tasksArray) {
-        this.createActiveTaskCounter();
+        this.createActiveTasksCounter();
         this.tasksContainer.innerHTML = '';
 
         tasksArray.forEach((task, taskIndex) => {
@@ -154,7 +154,7 @@ class ToDoList {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 
-    createActiveTaskCounter () {
+    createActiveTasksCounter () {
         const counter = document.getElementById('todo-counter-content');
         let amount = this.activeTasks.length;
 

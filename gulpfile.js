@@ -8,6 +8,7 @@ const del = require('del');
 const minify = require('gulp-minify');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
+const order = require('gulp-order');
 
 const paths = {
     html: {
@@ -54,6 +55,12 @@ function css () {
 function js () {
     return src(paths.js.src)
         .pipe(sourcemaps.init())
+        .pipe(order([
+            'subjects/*',
+            'elements/*',
+            'observers/*',
+            'main.js'
+        ]))
         .pipe(concat('index.js'))
         .pipe(babel())
         .pipe(minify())
